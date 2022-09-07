@@ -1,24 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+
+import AppContext from "./config/AppContext";
+import Apropos from "./pages/Apropos";
+import ContactUs from "./pages/contactPage/ContactUs";
+import Header from "./components/header/Header";
+import Home from "./pages/homePage/Home";
+import Service from "./pages/Services";
 
 function App() {
+  const [dataInput, setDataInput] = React.useState(null);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <AppContext.Provider value={{ dataInput, setDataInput }}>
+        <Header />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/contactez-nous" element={<ContactUs />} />
+          <Route path="/services" element={<Service />} />
+          <Route path="/a-propos" element={<Apropos />} />
+        </Routes>
+      </AppContext.Provider>
+    </BrowserRouter>
   );
 }
 
